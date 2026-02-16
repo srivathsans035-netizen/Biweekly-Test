@@ -1,0 +1,110 @@
+Rearrange Words in a Sentence
+Given a sentence of words separated by spaces, you need to rearrange the words in the sentence such that the words are sorted by their length in ascending order. If multiple words have the same length, their relative order in the original sentence should be preserved.
+
+
+Your task is to return the rearranged sentence with exactly one space between each word, and the first word should be capitalized.
+
+
+Rules & Constraints:
+
+sentence contains only lowercase and uppercase English letters and spaces.
+There is exactly one space between two consecutive words.
+All words in sentence have the same case (either all lowercase or first word capitalized).
+The length of sentence is in the range [1, 10^5].
+Words in sentence have lengths in the range [1, 10^4].
+
+Example 1:
+
+Input: sentence = "Leetcode makes me happy"
+
+Output: "Me makes happy leetcode"
+
+Explanation: Words sorted by length: "Me" (2), "makes" (5), "happy" (5), "leetcode" (8). Words with the same length maintain their original relative order.
+
+
+Example 2:
+
+Input: sentence = "Keep calm and carry on"
+
+Output: "On and keep calm carry"
+
+Explanation: Words sorted by length: "On" (2), "and" (3), "keep" (4), "calm" (4), "carry" (5). Words maintain their relative order within the same length group.
+
+
+Example 3:
+
+Input: sentence = "To be or not to be"
+
+Output: "To be or to be not"
+
+Explanation: Words sorted by length: "To" (2), "be" (2), "or" (2), "to" (2), "be" (2), "not" (3). All words of length 2 maintain their original order, followed by "not".
+
+
+Expected Time Complexity: O(N log N), where N is the number of words in the sentence.
+
+Expected Space Complexity: O(N) for storing the words and result.
+
+
+
+
+
+
+
+
+
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Main {
+    public static void main(String[] args) {
+        String str = "Leetcode makes me happy";
+        String str2 = "To be or not to be";
+        String str3 = "Keep calm and carry on";
+        String str4 = "";
+        String str5 = "hello";
+        Main mn = new Main();
+        System.out.println(mn.rearrangeWords(str));
+        System.out.println(mn.rearrangeWords(str2));
+        System.out.println(mn.rearrangeWords(str3));
+        System.out.println(mn.rearrangeWords(str4));
+        System.out.println(mn.rearrangeWords(str5));
+
+
+    }
+    
+     public String rearrangeWords(String s){
+         if(s.length() == 0){
+             return s;
+         }
+        String [] arr = s.split(" ");
+        if(arr.length == 1){
+            return new String(arr[0]);
+        }
+        for(int i = 1; i < arr.length; i++){
+                String key = arr[i];
+                int j = i - 1;
+                while(j >= 0 && arr[j].length() > key.length()){
+                        arr[j+1] = arr[j];
+                        j--;
+                    }
+                arr[j+1] = key;
+            }
+
+            String first = "";
+            for(int i = 0; i < arr[0].length(); i++){
+                if(i == 0){
+                    first += Character.toUpperCase(arr[0].charAt(i));
+                }
+                else{
+                    first += arr[0].charAt(i);
+                }
+            }
+            arr[0] = first;
+                
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < arr.length; i++){
+                sb.append(arr[i] + " ");
+            }
+            return sb.toString();
+        }  
+}
