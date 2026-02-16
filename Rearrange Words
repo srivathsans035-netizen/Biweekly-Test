@@ -76,7 +76,7 @@ class Main {
          if(s.length() == 0){
              return s;
          }
-        String [] arr = s.split(" ");
+        String [] arr = s.toLowerCase().split(" ");
         if(arr.length == 1){
             return new String(arr[0]);
         }
